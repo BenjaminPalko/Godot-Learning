@@ -1,0 +1,73 @@
+[gd_scene load_steps=7 format=3 uid="uid://cisgj8mawuyxu"]
+
+[ext_resource type="PackedScene" uid="uid://kqy8tfmf727" path="res://sphere.tscn" id="1_2qust"]
+[ext_resource type="PackedScene" uid="uid://xxw3caf8yf7" path="res://mouse_tracker.tscn" id="2_tvfsf"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b5i11"]
+size = Vector3(5, 0.25, 5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_d0kgh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ga6bl"]
+size = Vector3(5, 1, 0.25)
+
+[sub_resource type="BoxMesh" id="BoxMesh_26ql6"]
+
+[node name="Main" type="Node"]
+
+[node name="Floor" type="StaticBody3D" parent="."]
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_b5i11")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor/CollisionShape3D"]
+transform = Transform3D(5, 0, 0, 0, 0.25, 0, 0, 0, 5, 0, 0, 0)
+mesh = SubResource("BoxMesh_d0kgh")
+skeleton = NodePath("../..")
+
+[node name="Walls" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.625, 2.625)
+shape = SubResource("BoxShape3D_ga6bl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/CollisionShape3D"]
+transform = Transform3D(5, 0, 0, 0, 1, 0, 0, 0, 0.25, 0, 0, 0)
+mesh = SubResource("BoxMesh_26ql6")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.625, -2.625)
+shape = SubResource("BoxShape3D_ga6bl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/CollisionShape3D2"]
+transform = Transform3D(5, 0, 0, 0, 1, 0, 0, 0, 0.25, 0, 0, 0)
+mesh = SubResource("BoxMesh_26ql6")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Walls"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2.625, 0.625, 0)
+shape = SubResource("BoxShape3D_ga6bl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/CollisionShape3D3"]
+transform = Transform3D(5, 0, 0, 0, 1, 0, 0, 0, 0.25, 0, 0, 0)
+mesh = SubResource("BoxMesh_26ql6")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="Walls"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2.625, 0.625, 0)
+shape = SubResource("BoxShape3D_ga6bl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/CollisionShape3D4"]
+transform = Transform3D(5, 0, 0, 0, 1, 0, 0, 0, 0.25, 0, 0, 0)
+mesh = SubResource("BoxMesh_26ql6")
+
+[node name="Sphere" parent="." instance=ExtResource("1_2qust")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.84107, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.939412, 0.342791, 0, -0.342791, 0.939412, 0, 3.15136, 5.0382)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.05869, -1.01294)
+
+[node name="MouseTracker" parent="." node_paths=PackedStringArray("Camera") instance=ExtResource("2_tvfsf")]
+Camera = NodePath("../Camera3D")

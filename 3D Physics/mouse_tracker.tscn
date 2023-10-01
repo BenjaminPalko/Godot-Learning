@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://xxw3caf8yf7"]
+
+[ext_resource type="Script" path="res://3D Physics/MouseTracker.cs" id="1_1k1wv"]
+
+[node name="MouseTracker" type="Node3D"]
+script = ExtResource("1_1k1wv")
